@@ -917,7 +917,7 @@
   <div class="modal-content">
     <span class="close-modal">&times;</span>
     <h2>Book Your Consultation</h2>
-    <form id="consultation-form">
+    <form id="consultation-form" action="https://formsubmit.co/anthonywalcott31@gmail.com" method="POST">
       <div class="form-group">
         <label for="name">Full Name *</label>
         <input type="text" id="name" name="name" required>
@@ -1171,115 +1171,94 @@
 
 <!-- Add this JavaScript code just before the closing </body> tag, after the existing script -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Get modal elements
-    const modal = document.getElementById('consultation-modal');
-    const closeModalBtn = document.querySelector('.close-modal');
-    const consultationForm = document.getElementById('consultation-form');
-    const formSuccess = document.getElementById('form-success');
-    const closeSuccessBtn = document.querySelector('.close-success');
-    
-    // Get all CTA buttons
-    const ctaButtons = document.querySelectorAll('.cta-button');
-    
-    // Open modal when CTA is clicked
-    ctaButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-      });
-    });
-    
-    // Close modal when clicking close button or outside
-    closeModalBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-    
-    // Close success message
-    closeSuccessBtn.addEventListener('click', () => {
-      closeModal();
-      // Reset the form view after closing
-      setTimeout(() => {
-        formSuccess.classList.add('hidden');
-        consultationForm.style.display = 'block';
-      }, 300);
-    });
-    
-    // Handle form submission
-    consultationForm.addEventListener('submit', (e) => {
+document.addEventListener('DOMContentLoaded', () => {
+  // Get modal elements
+  const modal = document.getElementById('consultation-modal');
+  const closeModalBtn = document.querySelector('.close-modal');
+  const consultationForm = document.getElementById('consultation-form');
+  const formSuccess = document.getElementById('form-success');
+  const closeSuccessBtn = document.querySelector('.close-success');
+  
+  // Get all CTA buttons
+  const ctaButtons = document.querySelectorAll('.cta-button');
+  
+  // Open modal when CTA is clicked
+  ctaButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
       e.preventDefault();
-      
-      // Get form values
-      const formData = new FormData(consultationForm);
-      const formDataObject = {};
-      
-      // Convert checkbox values to array
-      const serviceValues = [];
-      
-      formData.forEach((value, key) => {
-        if (key === 'services') {
-          serviceValues.push(value);
-          if (!formDataObject[key]) {
-            formDataObject[key] = [];
-          }
-          formDataObject[key].push(value);
-        } else {
-          formDataObject[key] = value;
-        }
-      });
-      
-      // Here you would normally send the data to a server
-      // Since this is a front-end implementation, we'll simulate sending an email
-      
-      console.log('Form data to be sent:', formDataObject);
-      
-      // Simulate email sending with a delay
-      const sendButton = document.querySelector('.submit-button');
-      sendButton.textContent = 'Sending...';
-      sendButton.disabled = true;
-      
-      setTimeout(() => {
-        // Show success message
-        consultationForm.style.display = 'none';
-        formSuccess.classList.remove('hidden');
-        
-        // Reset form for next time
-        consultationForm.reset();
-        sendButton.textContent = 'Submit Request';
-        sendButton.disabled = false;
-        
-        // In a real implementation, you would use a server-side script to send an email
-        const emailData = {
-          to: 'anthonywalcott31@gmail.com',
-          subject: 'New Consultation Request from Apex Auto Customs',
-          body: `
-            Name: ${formDataObject.name}
-            Email: ${formDataObject.email}
-            Phone: ${formDataObject.phone}
-            Car: ${formDataObject['car-year']} ${formDataObject['car-make']} ${formDataObject['car-model']}
-            Services Interested: ${serviceValues.join(', ') || 'None selected'}
-            Additional Details: ${formDataObject.message || 'None provided'}
-          `
-        };
-        
-        console.log('Email would be sent with:', emailData);
-      }, 1500);
+      openModal();
     });
-    
-    // Functions to open and close modal
-    function openModal() {
-      modal.classList.add('show');
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    }
-    
-    function closeModal() {
-      modal.classList.remove('show');
-      document.body.style.overflow = ''; // Restore scrolling
+  });
+  
+  // Close modal when clicking close button or outside
+  closeModalBtn.addEventListener('click', closeModal);
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
     }
   });
+  
+  // Close success message
+  closeSuccessBtn.addEventListener('click', () => {
+    closeModal();
+    // Reset the form view after closing
+    setTimeout(() => {
+      formSuccess.classList.add('hidden');
+      consultationForm.style.display = 'block';
+    }, 300);
+  });
+  
+  // Handle form submission
+  consultationForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Get form values
+    const formData = new FormData(consultationForm);
+    
+    // Make sure the form data is submitted to Formspree
+    fetch('https://formsubmit.co/ajax/anthonywalcott31@gmail.com', { // Replace with your FormSubmit endpoint
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Show success message
+      consultationForm.style.display = 'none';
+      formSuccess.classList.remove('hidden');
+      
+      // Reset form for next time
+      consultationForm.reset();
+      
+      // Optionally, log the response from Formspree
+      console.log('Form submitted successfully:', data);
+    })
+    .catch(error => {
+      // Handle any errors that occur during the form submission
+      console.error('Form submission error:', error);
+      // Optionally show an error message
+    });
+    
+    // Disable the submit button and show loading text
+    const sendButton = document.querySelector('.submit-button');
+    sendButton.textContent = 'Sending...';
+    sendButton.disabled = true;
+  });
+  
+  // Functions to open and close modal
+  function openModal() {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    const sendButton = document.querySelector('.submit-button');
+    sendButton.textContent = 'Submit';
+    sendButton.disabled = false;
+  }
+  
+  function closeModal() {
+    modal.classList.remove('show');
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+});
+
   </script>
 </body>
 </html>
