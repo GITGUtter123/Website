@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apex Auto Customs specializes in premium automotive customizations, including star headliners, ambient lighting, underglow, and more. Transform your vehicle into a work of art.">
+  <meta name="keywords" content="auto customization, car lighting, star headliner, ambient lighting, underglow, emergency lighting, remote starter, dash cameras, start light, under glow, automotive lighting, custom lighting, ApexAutoCustoms, APEX AUTO CUSTOMS, apex auto customs, apex auto customs">
+  <meta name="author" content="Apex Auto Customs">
+  <meta property="og:title" content="Apex Auto Customs | Premium Automotive Customization">
+  <meta property="og:description" content="Transform your ride with Apex Auto Customs. Premium automotive customizations including star headliners, ambient lighting, and more.">
+  <meta property="og:url" content="https://www.apexautocustoms.com">
+  <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.apexautocustoms.com">
   <title>Apex Auto Customs | Premium Automotive Customization</title>
   <style>
     :root {
@@ -562,6 +570,7 @@
         color: var(--light);
         font-size: 1.5rem;
         cursor: pointer;
+        display: none;
       }
       
       /* Added close button click animation */
@@ -570,6 +579,12 @@
         transition: transform 0.1s;
       }
       
+      @media (max-width: 767px) {
+      .close-nav {
+          display: block; /* or inline-block, depending on your layout */
+        }
+      }
+
       .services, .gallery {
         padding: 4rem 0;
       }
@@ -609,11 +624,12 @@
       <div class="logo">APEX <span>AUTO</span> CUSTOMS</div>
       <button class="nav-toggle" id="nav-toggle">☰</button>
       <nav id="main-nav">
-        <button class="close-nav" id="close-nav">✕</button>
+        <button class="close-nav" id="close-nav", hidden="true">✕</button>
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#deposit">Deposit</a></li>
           <li><a href="#contact">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -745,7 +761,28 @@
       </div>
     </div>
   </section>
-  
+
+  <section class="deposit" id="deposit">
+    <div class="container">
+      <h2 class="section-title">Make Your Deposit</h2>
+      <div class="deposit-container">
+        <div class="deposit-info">
+          <p>After we've contacted you with your customization quote, please use the PayPal button below to make your deposit payment.</p>
+          <p class="deposit-note">Please only proceed with payment after receiving your quote reference number.</p>
+          <div class="paypal-button-container">
+            <!-- Replace with your actual PayPal button code -->
+            <div class="paypal-button">
+              <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YOUR_BUTTON_ID" target="_blank" class="paypal-link">
+                <img src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" alt="Pay Now with PayPal">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <footer id="contact">
     <div class="container">
       <div class="footer-content">
@@ -943,7 +980,7 @@
         <input type="number" id="car-year" name="car-year" min="1900" max="2030" placeholder="e.g. 2023" required>
       </div>
       <div class="form-group">
-        <label for="services">Services Interested In (Select all that apply)</label>
+        <label for="services">Services Interested in (Select all that apply)</label>
         <div class="checkbox-group">
           <label><input type="checkbox" name="services" value="Star Headliner"> Star Headliner</label>
           <label><input type="checkbox" name="services" value="Ambient Lighting"> Ambient Lighting</label>
@@ -1165,6 +1202,71 @@
     
     .checkbox-group {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* Deposit Section Styles */
+  .deposit {
+    padding: 8rem 0;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+  }
+
+  .deposit-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .deposit-info {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 2rem;
+    border: 1px solid rgba(3, 169, 244, 0.1);
+    text-align: center;
+  }
+
+  .deposit-info p {
+    margin-bottom: 1.5rem;
+    color: #ccc;
+    line-height: 1.6;
+  }
+
+  .deposit-note {
+    font-style: italic;
+    padding: 1rem;
+    background: rgba(3, 169, 244, 0.1);
+    border-radius: 5px;
+    border-left: 3px solid var(--primary);
+    text-align: left;
+  }
+
+  .paypal-button-container {
+    margin-top: 2rem;
+  }
+
+  .paypal-button {
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+
+  .paypal-button:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Responsive adjustments for deposit section */
+  @media (max-width: 992px) {
+    .deposit-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .deposit-info {
+      order: 1;
+    }
+    
+    .deposit-payment {
+      order: 2;
     }
   }
 </style>
