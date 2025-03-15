@@ -611,6 +611,10 @@
         grid-template-columns: 1fr;
       }
     }
+
+      html {
+        scroll-behavior: smooth;
+      }
   </style>
 </head>
 <body>
@@ -618,6 +622,7 @@
     <div class="animated-background"></div>
     <div class="light-particles" id="light-particles"></div>
   </div>
+
   
   <header id="header">
     <div class="header-container">
@@ -823,7 +828,6 @@
         <div class="social-links">
           <a href="https://facebook.com" class="social-link">FB</a>
           <a href="https://instagram.com" class="social-link">IG</a>
-          <a href="https://youtube.com" class="social-link">YT</a>
           <a href="https://x.com" class="social-link">x</a>
         </div>
         <p>&copy; 2025 Apex Auto Customs. All rights reserved.</p>
@@ -950,67 +954,75 @@
   </script>
 
   <!-- Add this modal HTML code just before the closing </body> tag -->
-<div id="consultation-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h2>Book Your Consultation</h2>
-    <form id="consultation-form" action="https://formsubmit.co/anthonywalcott31@gmail.com" method="POST">
-      <div class="form-group">
-        <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone Number *</label>
-        <input type="tel" id="phone" name="phone" required>
-      </div>
-      <div class="form-group">
-        <label for="car-make">Car Make *</label>
-        <input type="text" id="car-make" name="car-make" placeholder="e.g. BMW, Audi, Toyota" required>
-      </div>
-      <div class="form-group">
-        <label for="car-model">Car Model *</label>
-        <input type="text" id="car-model" name="car-model" placeholder="e.g. 3 Series, A4, Camry" required>
-      </div>
-      <div class="form-group">
-        <label for="car-year">Car Year *</label>
-        <input type="number" id="car-year" name="car-year" min="1900" max="2030" placeholder="e.g. 2023" required>
-      </div>
-      <div class="form-group">
-        <label for="services">Services Interested in (Select all that apply)</label>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="services" value="Star Headliner"> Star Headliner</label>
-          <label><input type="checkbox" name="services" value="Ambient Lighting"> Ambient Lighting</label>
-          <label><input type="checkbox" name="services" value="Underglow"> Underglow</label>
-          <label><input type="checkbox" name="services" value="Emergency Lighting"> Emergency Lighting</label>
-          <label><input type="checkbox" name="services" value="Remote Starter"> Remote Starter</label>
-          <label><input type="checkbox" name="services" value="Dash Cameras"> Dash Cameras</label>
+  <div id="consultation-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Book Your Consultation</h2>
+      <form id="consultation-form" action="https://formsubmit.co/anthonywalcott31@gmail.com" method="POST">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="message">Additional Details</label>
-        <textarea id="message" name="message" rows="4" placeholder="Any specific requirements or questions?"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="submit-button">Submit Request</button>
-      </div>
-    </form>
-    <div id="form-success" class="hidden">
-      <div class="success-message">
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-          <circle cx="32" cy="32" r="30" stroke="#03a9f4" stroke-width="4"/>
-          <path d="M20 32L28 40L44 24" stroke="#03a9f4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h3>Thank You!</h3>
-        <p>Your consultation request has been submitted. We'll contact you shortly to discuss your customization needs.</p>
-        <button class="close-success">Close</button>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="car-make">Car Make *</label>
+          <input type="text" id="car-make" name="car-make" placeholder="e.g. BMW, Audi, Toyota" required>
+        </div>
+        <div class="form-group">
+          <label for="car-model">Car Model *</label>
+          <input type="text" id="car-model" name="car-model" placeholder="e.g. 3 Series, A4, Camry" required>
+        </div>
+        <div class="form-group">
+          <label for="car-year">Car Year *</label>
+          <input type="number" id="car-year" name="car-year" min="1950" max="2060" placeholder="e.g. 2024" required>
+        </div>
+        <div class="form-group">
+          <label for="services">Services Interested in (Select all that apply)</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="services[]" value="Star Headliner"> Star Headliner</label>
+            <label><input type="checkbox" name="services[]" value="Ambient Lighting"> Ambient Lighting</label>
+            <label><input type="checkbox" name="services[]" value="Underglow"> Underglow</label>
+            <label><input type="checkbox" name="services[]" value="Emergency Lighting"> Emergency Lighting</label>
+            <label><input type="checkbox" name="services[]" value="Remote Starter"> Remote Starter</label>
+            <label><input type="checkbox" name="services[]" value="Dash Cameras"> Dash Cameras</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="service-level">Service Level *</label>
+          <div class="radio-group">
+            <label><input type="radio" name="service-level" value="Basic" required> Basic</label>
+            <label><input type="radio" name="service-level" value="Advanced"> Advanced</label>
+            <label><input type="radio" name="service-level" value="Premium"> Premium</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Additional Details</label>
+          <textarea id="message" name="message" rows="4" placeholder="Any specific requirements or questions?"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-button">Submit Request</button>
+        </div>
+      </form>
+      <div id="form-success" class="hidden">
+        <div class="success-message">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" stroke="#03a9f4" stroke-width="4"/>
+            <path d="M20 32L28 40L44 24" stroke="#03a9f4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Thank You!</h3>
+          <p>Your consultation request has been submitted. We'll contact you shortly to discuss your customization needs.</p>
+          <button class="close-success">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <!-- Add this CSS to the existing <style> section in the <head> -->
 <style>
